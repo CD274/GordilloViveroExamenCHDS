@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloSuma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resultado de la Suma"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FF9800"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Resultado de la suma -->
+    <TextView
+        android:id="@+id/textViewSuma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTituloSuma"
+        android:layout_marginTop="16dp"
+        android:text="Cargando resultado de la suma..."
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#EEEEEE"
+        android:textColor="#000000"
+        android:gravity="center" />
+
+    <!-- Botón para realizar la suma -->
+
+</RelativeLayout>

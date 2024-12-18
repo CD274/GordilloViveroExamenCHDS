@@ -1,89 +1,64 @@
 package com.studio.examenconsumomovil;
 
-
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
 public class MainActivity extends AppCompatActivity {
-
-    private EditText textArea;
-    private Button btnEnviar;
-    JSONArray array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textArea = findViewById(R.id.text_area);
-        btnEnviar = findViewById(R.id.btn_Enviar);
+        // Referencias a los botones
+        Button btnBiografia = findViewById(R.id.btnBiografia);
+        Button btnListaNombres = findViewById(R.id.btnListaNombres);
+        Button btnPerimetroArea = findViewById(R.id.btnPerimetroArea);
+        Button btnSuma = findViewById(R.id.btnSuma);
+        Button btnSumaParametros = findViewById(R.id.btnSumaParametros);
 
-
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
+        // Evento para abrir Biografía
+        btnBiografia.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                recibirMensaje();
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Biografia.class));
+            }
+        });
+
+        // Evento para abrir Lista de Nombres
+        btnListaNombres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ListaDeNombres.class));
+            }
+        });
+
+        // Evento para abrir Perímetro y Área
+        btnPerimetroArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PerimetroAreaFiguras.class));
+            }
+        });
+
+        // Evento para abrir Suma
+        btnSuma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Suma.class));
+            }
+        });
+
+        // Evento para abrir Suma con Parámetros
+        btnSumaParametros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SumaParametros.class));
             }
         });
     }
-
-    private void recibirMensaje() {
-        String url = "http://10.10.35.19:3000/nombre";
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        StringBuilder mensaje = new StringBuilder();
-
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject obj = response.getJSONObject(i);
-                                String id = obj.getString("id");
-                                String nombre = obj.getString("nombre");
-
-                                mensaje.append("ID: ").append(id)
-                                        .append(", Nombre: ").append(nombre)
-                                        .append("\n");
-                            }
-
-                            textArea.setText(mensaje.toString());
-
-                        } catch (JSONException e) {
-                            Toast.makeText(MainActivity.this, "Error al procesar datos", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                });
-        queue.add(jsonArrayRequest);
-    }
-
 }
