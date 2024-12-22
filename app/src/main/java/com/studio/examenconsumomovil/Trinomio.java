@@ -1,5 +1,6 @@
 package com.studio.examenconsumomovil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class Trinomio extends AppCompatActivity {
         }
 
         // Construir la URL del endpoint
-        String url = Config.IP+"/trinomio/" + a + "/" + b + "/" + c;
+        String url = Config.IP + "/trinomios/" + a + "/" + b + "/" + c;
 
         // Enviar solicitud al servidor
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -71,20 +72,27 @@ public class Trinomio extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            // Parsear la respuesta JSON
-                            JSONObject jsonResponse = new JSONObject(response);
+                            // Parsear la respuesta JSON (array de objetos)
+                            JSONArray jsonResponse = new JSONArray(response);
 
-                            // Obtener los valores del JSON
-                            String mensaje = jsonResponse.optString("mensaje", "Sin mensaje");
-                            String binomio = jsonResponse.optString("binomio", "No aplica");
-                            String solucion = jsonResponse.optString("solucion", "No aplica");
+                            // Formatear resultados
+                            StringBuilder resultado = new StringBuilder();
+                            for (int i = 0; i < jsonResponse.length(); i++) {
+                                JSONObject item = jsonResponse.getJSONObject(i);
 
-                            // Formatear y mostrar los resultados
-                            String resultado = mensaje + "\n" +
-                                    "Binomio: " + binomio + "\n" +
-                                    "Solución: " + solucion;
+                                String trinomio = item.optString("trinomio", "Sin trinomio");
+                                String mensaje = item.optString("mensaje", "Sin mensaje");
+                                String binomio = item.optString("binomio", "No aplica");
+                                String solucion = item.optString("solucion", "No aplica");
 
-                            txtResultado.setText(resultado);
+                                resultado.append("Trinomio: ").append(trinomio).append("\n")
+                                        .append(mensaje).append("\n")
+                                        .append("Binomio: ").append(binomio).append("\n")
+                                        .append("Solución: ").append(solucion).append("\n\n");
+                            }
+
+                            // Mostrar resultados en el TextView
+                            txtResultado.setText(resultado.toString());
                         } catch (JSONException e) {
                             txtResultado.setText("Error al procesar la respuesta del servidor.");
                         }
