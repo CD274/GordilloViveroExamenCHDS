@@ -29,7 +29,7 @@
         android:rowCount="3"
         android:layout_marginTop="16dp">
 
-        <!-- Buttons -->
+        <!-- Existing Buttons -->
         <Button
             android:id="@+id/btnBiografia"
             android:layout_width="0dp"
@@ -71,7 +71,7 @@
             android:text="Suma" />
 
         <Button
-            android:id="@+id/btnSumaParametros"
+            android:id="@+id/btnTrinomio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -79,6 +79,17 @@
             android:backgroundTint="#FF9800"
             android:textColor="#FFFFFF"
             android:text="Suma con Parámetros" />
+
+        <!-- New Button -->
+        <Button
+            android:id="@+id/btnTrinomioC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:backgroundTint="#2196F3"
+            android:text="Trinomio Cuadrado Perfecto"
+            android:textColor="#FFFFFF" />
 
     </GridLayout>
 </RelativeLayout>

@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnListaNombres = findViewById(R.id.btnListaNombres);
         Button btnPerimetroArea = findViewById(R.id.btnPerimetroArea);
         Button btnSuma = findViewById(R.id.btnSuma);
-        Button btnSumaParametros = findViewById(R.id.btnSumaParametros);
+        Button btnSumaParametros = findViewById(R.id.btnTrinomio);
+        Button btnTrinomio = findViewById(R.id.btnTrinomioC);
 
         // Evento para abrir Biografía
         btnBiografia.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SumaParametros.class));
+            }
+        });
+        // Evento para abrir Calculo de Trinomio Cuadrado Perfecto
+        btnTrinomio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Trinomio.class));
             }
         });
     }
